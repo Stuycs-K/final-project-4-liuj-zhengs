@@ -11,11 +11,13 @@ info
 info
 
 
-## GROUP MEMBER 2
+## GROUP MEMBER 2: Stanley Zheng
 
-### date x
+### 5/17/23
 
-info
+- Researched TryHackMe rooms that are feasible for the malware analysis
+  - https://tryhackme.com/room/basicdynamicanalysis
+  - https://tryhackme.com/room/basicmalwarere
 
 ### date y
 
