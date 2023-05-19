@@ -12,7 +12,7 @@
   - https://help.tryhackme.com/en/articles/6495821-uploading-interactive-materials
   - https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html
 - Reseached VM safety
--   https://superuser.com/questions/289054/is-my-host-machine-completely-isolated-from-a-virus-infected-virtual-machine
+  - https://superuser.com/questions/289054/is-my-host-machine-completely-isolated-from-a-virus-infected-virtual-machine
 
 ## GROUP MEMBER 2: Stanley Zheng
 
