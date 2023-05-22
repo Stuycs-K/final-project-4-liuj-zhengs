@@ -31,6 +31,7 @@
   - https://tryhackme.com/room/basicdynamicanalysis
   - https://tryhackme.com/room/basicmalwarere
 
-### date y
-
-info
+### 5/22/23
+- Began working on basic code obfuscator in python
+  - Get and change variable names
+  - add dummy code
