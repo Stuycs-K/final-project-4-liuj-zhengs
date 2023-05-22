@@ -21,6 +21,7 @@
 - Researched reverse engineering---Why we need code obfuscation
   - https://www.eccouncil.org/cybersecurity-exchange/ethical-hacking/malware-reverse-engineering/
   - Plan is now: Focus on making a code obfuscator, and make a tryhackme room on reverse engineering to demonstrate the use of our product
+- Started work on code_obfuscator.java
 
 ## GROUP MEMBER 2: Stanley Zheng
 
