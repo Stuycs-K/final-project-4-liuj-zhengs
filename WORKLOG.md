@@ -35,3 +35,7 @@
 - Began working on basic code obfuscator in python
   - Get and change variable names
   - add dummy code
+ 
+### 5/23/23
+- Wrote up some rules for determing where variables were in the code
+  - has a .,)]= after it?
