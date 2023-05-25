@@ -23,6 +23,18 @@
   - Plan is now: Focus on making a code obfuscator, and make a tryhackme room on reverse engineering to demonstrate the use of our product
 - Started work on code_obfuscator.java
 
+### 5/23/23
+
+- We are going to work both in python instead of making one in java and one in python.
+- Plan is: 
+  - Changed variable names
+  - Strings are encrypted/hidden by changing them to hex (non-human-readable)
+  - Inserting dummy code, statements that go nowhere, stuff that makes the code longer/more confusing but doesn't actually change the functionality 
+
+### 5/25/23
+
+- Began working on methods to add dummy code and scramble/make messy existing code in obfuscator
+
 ## GROUP MEMBER 2: Stanley Zheng
 
 ### 5/17/23
