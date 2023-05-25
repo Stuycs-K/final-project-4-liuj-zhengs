@@ -39,3 +39,7 @@
 ### 5/23/23
 - Wrote up some rules for determing where variables were in the code
   - has a .,)]= after it?
+
+### 5/24/23
+- finished variable name replacement
+- added some dummy code adders
