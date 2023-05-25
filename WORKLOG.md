@@ -34,6 +34,9 @@
 ### 5/25/23
 
 - Began working on methods to add dummy code and scramble/make messy existing code in obfuscator
+- Some common ways that dead code can be created
+  - if statements that don't actually run... ex: a if (false) in a while (true)
+  - conditionals work well to provide an alternate option but not actually being an option.
 
 ## GROUP MEMBER 2: Stanley Zheng
 
