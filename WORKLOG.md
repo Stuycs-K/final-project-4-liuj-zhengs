@@ -58,3 +58,6 @@
 ### 5/24/23
 - finished variable name replacement
 - added some dummy code adders
+
+### 5/25/23
+- convert all strings to hex, but have a method to convert it back (not affect code
