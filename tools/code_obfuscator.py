@@ -18,17 +18,30 @@ for i in range(len(variable_names)):
 
 
 # change var names
-file = "\n" + file
-for i in range(len(variable_names)):
-    file = re.sub(r"(?<=[^.])(\b{}\b)".format(variable_names[i][0]), obfuscated_names[i], file)
+# file = "\n" + file
+# for i in range(len(variable_names)):
+#     file = re.sub(r"(?<=[^.])(\b{}\b)".format(variable_names[i][0]), obfuscated_names[i], file)
 
 
 # add dummy variables
-file = file.split("\n")
-for i in range(random.randint(50,100)):
-    randstr = str(i) + " "*random.randint(2,10) + "=" + " "*random.randint(2,10) + "poop"
-    file.insert(random.randint(0,len(file)-1),randstr)
+# file = file.split("\n")
+# for i in range(random.randint(50,100)):
+#     randstr = str(i) + " "*random.randint(2,10) + "=" + " "*random.randint(2,10) + "poop"
+#     file.insert(random.randint(0,len(file)-1),randstr)
 
+# file = "\n".join(file)
+# print(file)
+
+# remove all spaces
+file = file.split("\n")
+print(file)
+for line in file: 
+    if line == '': 
+        file.remove(line) 
 file = "\n".join(file)
 print(file)
+# insert unused functions
 
+
+
+# inject if conditionals
