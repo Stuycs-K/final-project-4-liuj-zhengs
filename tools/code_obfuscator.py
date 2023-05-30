@@ -40,3 +40,15 @@ for i in re.findall(r"(\".*\"|'.*')",file):
 
 print(file)
 
+# insert unused functions
+
+# inject if conditionals
+
+# remove all spaces
+file = file.split("\n")
+print(file)
+for line in file: 
+    if line == '': 
+        file.remove(line) 
+file = "\n".join(file)
+print(file)
