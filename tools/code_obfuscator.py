@@ -26,19 +26,23 @@ for i in range(len(variable_names)):
 # add dummy variables
 file = file.split("\n")
 for _ in range(random.randint(50,100)):
-
-    randstr = ''.join(random.choices(string.ascii_letters, k=15)) + " "*random.randint(2,20) + "=" + " "*random.randint(2,10) + "5"
+    data = random.choice(["string","int"])
+    if data == "string":
+        data = ''.join(random.choices(string.ascii_letters, k=15))
+        data =  f"\"{str(data)}\""
+    elif data == "int":
+        data = random.randint(1,100000)
+    randstr = ''.join(random.choices(string.ascii_letters, k=15)) + " "*random.randint(2,20) + "=" + " "*random.randint(2,10) + str(data)
     file.insert(random.randint(0,len(file)-1),randstr)
 
 file = "\n".join(file)
 
 
 for i in re.findall(r"(\".*\"|'.*')",file):
-    print(i)
     string = i[1:-1]
     file = re.sub(i,f"bytes.fromhex(\'{string.encode('utf-8').hex()}\').decode('utf-8')",file)
 
-print(file)
+
 
 # insert unused functions
 
@@ -46,7 +50,7 @@ print(file)
 
 # remove all spaces
 file = file.split("\n")
-print(file)
+
 for line in file: 
     if line == '': 
         file.remove(line) 
