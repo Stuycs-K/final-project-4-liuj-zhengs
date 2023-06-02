@@ -56,44 +56,84 @@ for i in re.findall(r"(\".*\"|'.*')",file):
 
 #functions for dummy random code generation
 
-def genFillerCode(num_lines, indents):
-    code = ''
-    for num in range(num_lines):
-        statement = genFillerStatements()
-        code += '    '*indents + f'{statement}\n'
+def genFillerCode(num_lines, indent, max_depth):
+    code = '\n'
+    for num in range(random.randint(1, num_lines)):
+        statement = genFillerStatements(indent, max_depth)
+        code += f'{statement}\n'
     return code
 
-def genFillerStatements():
+def genFillerStatements(indent, max_depth):
     statements = [
-        f'{randVar()} = {randData("int")}',
-        f'{randVar()} = {randData("string")}'
+        " "*indent + f'{randVar()} = {randData("int")}',
+        " "*indent + f'{randVar()} = {randData("string")}',
     ]
-    return random.choice(statements)
+    if max_depth > 1:
+        statements.append(genFor(indent, max_depth - 1))
+        statements.append(genIf(indent, max_depth - 1))
+        # statements.append(genWhile(indent, max_depth - 1)) 
+    choice = random.choice(statements)
+    return choice
 
-# inject if conditionals into while loops
+# inject if conditionals
 
-def genIf(): 
-    variable1 = randVar() 
-    variable2 = randVar()
-    conditionals = [
-        '==',
-        '!=',
-        '>=',
-        '<='
-    ]
-    code = f'\n{variable1} = {randData("int")} \n{variable2} = {randData("int")} \n'
-    code += f'if {variable1} {random.choice(conditionals)} {variable2}:\n' 
-    code += genFillerCode(random.randint(2,4), 1)
-    return code 
+def genIf(indent, max_depth): 
+    if max_depth > 0:
+        variable1 = randVar() 
+        variable2 = randVar()
+        conditionals = [
+            '==',
+            '!=',
+            '>=',
+            '<='
+        ]
+        code = "\n" +" "*indent + f'{variable1} = {randData("int")}\n'
+        code += " "*indent + f'{variable2} = {randData("int")}\n'
+        code += " "*indent + f'if {variable1} {random.choice(conditionals)} {variable2}:\n' 
+        code += genFillerCode(4, indent+4, max_depth - 1)
+        
+        return code 
+    else: 
+        return " "*(indent+4) + f'{randVar} = {randData}'
 
-def insertDummyIf(file):
+# inject for loops
+
+def genFor(indent, max_depth):
+    if max_depth > 0:
+        code = " "*indent + f'for {chr(97 + indent)} in range({random.randint(3,8)}):\n'
+        code += genFillerCode(4, indent+4, max_depth - 1)
+        return code
+    else:
+        return " "*(indent+4) + f'{randVar} = {randData}'
+
+# inject while loops (scrapped because variables would not cooperate)
+
+# def genWhile(indent, max_depth):
+#     conditionals = [
+#             '==',
+#             '!=',
+#             '<=',
+#         ]
+#     if max_depth > 0:
+#         variable = chr(97+indent)
+#         code = " "*indent + f'while {variable} {random.choice(conditionals)} {random.randint(1,3)}:\n'
+#         code += genFillerCode(4, indent+4, max_depth -1 )
+#         code += " "*(indent+4) + f'{variable} += 1' + '\n'
+#         return code
+#     else: 
+#         return " "*(indent+4) + f'{randVar} = {randData}'
+
+
+def insertDummy(file):
     output = ""
     file = file.split("\n")
     for i in range(len(file)):
         line = file[i]
-        hasConditional = re.search(r'^if\s+.+:', line)
-        if hasConditional:
-            output += genIf()
+        hasIf = re.search(r'\bif\s+.+:', line)
+        hasLoop = re.search(r'\bfor\s+.+:', line) or re.search(r'\bwhile\s+.+:', line)
+        if hasIf or hasLoop:
+            currentIndent = len(line) - len(line.lstrip(' '))
+            output += genFillerCode(random.randint(1,4),currentIndent, 5)
             output += f"\n{line}"
         else:
             output += f"\n{line}"
@@ -113,53 +153,49 @@ def oneLineify(file):
     for i in range(len(file)):
         line = file[i]
     # pserb was here
-        hasConditional = re.search(r'if\s+.+:', line) or re.search(r'elif\s+.+:', line) or re.search(r'^else:$', line)
-        if hasConditional:
-            output += f"\n{line}"
-        elif (line[0:4] == "    ") and (i < len(file)-1) and (file[i+1][0:4] != "    "):
+        nextIndent = 0
+        currentIndent = len(line) - len(line.lstrip(' '))
+        if i < len(file) - 1:
+            nextIndent = len(file[i+1]) - len(file[i+1].lstrip(' '))
+        
+        hasConditional = re.search(r'\bif\s+.+:', line) or re.search(r'\belif\s+.+:', line) or re.search(r'\belse:', line)
+        hasLoop = re.search(r'\bfor\s+.+:', line) or re.search(r'\bwhile\s+.+:', line)
+        if hasConditional or hasLoop:
+            output += f"\n{line}\n"
+        elif currentIndent > nextIndent:
             output += f"{line}\n"
         elif line == "":
-            output += line
+            output += line.lstrip(" ")
         else:
             output += f"{line};"
     
     return output
 
+
 def removeWhitespace(file):
     output = ""
     file = file.split("\n")
     for line in file:
-        if line[0:3] == "if ":
-            parts = line.split("if ")
-            output += "\nif "
-            output += "".join(parts[1].split())
-        elif line[0:5] == "elif ":
-            parts = line.split("elif ")
-            output += "\nelif "
+        hasConditional = re.search(r'\bif\s+.+:', line) or re.search(r'\belif\s+.+:', line) or re.search(r'\belse:', line)
+        hasLoop = re.search(r'\bfor\s+.+:', line) or re.search(r'\bwhile\s+.+:', line)
+        currentIndent = len(line) - len(line.lstrip(' '))
+        if hasConditional or hasLoop:
+            parts = line.split(":")
+            output += "\n" + parts[0] + ":"
             output += "".join(parts[1].split())
         elif line == "":
             pass
         else:
-            output += "\n"
+            output += "\n" + " "*currentIndent
             output += "".join(line.split())
 
     output = output.strip()
     return output
-    
         
-
-# remove all spaces
-file = file.split("\n")
-
-for line in file: 
-    if line == '': 
-        file.remove(line) 
-file = "\n".join(file)
-
 if not (os.path.exists("out")):
     os.makedirs("out")
 outfile = open(f"out/{filename}_obfuscated.py", "w")
-outfile.write(removeWhitespace(oneLineify(insertDummyIf(file))))
+outfile.write(removeWhitespace(oneLineify(insertDummy(file))))
 # outfile.write(insertDummyIf(file))
 # outfile.write(oneLineify(file))
 outfile.close()
