@@ -112,8 +112,8 @@ def oneLineify(file):
     file = file.split("\n")
     for i in range(len(file)):
         line = file[i]
-    # for line in file:
-        hasConditional = re.search(r'if\s+.+:', line) or re.search(r'elif\s+.+:', line) or re.search(r'else\s+.+:', line)
+    # pserb was here
+        hasConditional = re.search(r'if\s+.+:', line) or re.search(r'elif\s+.+:', line) or re.search(r'^else:$', line)
         if hasConditional:
             output += f"\n{line}"
         elif (line[0:4] == "    ") and (i < len(file)-1) and (file[i+1][0:4] != "    "):
@@ -136,10 +136,6 @@ def removeWhitespace(file):
         elif line[0:5] == "elif ":
             parts = line.split("elif ")
             output += "\nelif "
-            output += "".join(parts[1].split())
-        elif line[0:5] == "else ":
-            parts = line.split("else ")
-            output += "\nelse "
             output += "".join(parts[1].split())
         elif line == "":
             pass
@@ -165,7 +161,7 @@ if not (os.path.exists("out")):
 outfile = open(f"out/{filename}_obfuscated.py", "w")
 outfile.write(removeWhitespace(oneLineify(insertDummyIf(file))))
 # outfile.write(insertDummyIf(file))
-# print(removeWhitespace(oneLineify(file)))
+# outfile.write(oneLineify(file))
 outfile.close()
 
 print(f"wrote to out/{filename}_obfuscated.py")

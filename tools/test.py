@@ -1,7 +1,8 @@
-a = 1
-b = "LINUXHINT"
-c = 23
-d                                                                                = {"hi"}
-e        = [[2]]
+mrk = "cool"
 
-print(b[0])
+if mrk != "cool":
+    print("bummer")
+else:
+    print("thats sick")
+
+
