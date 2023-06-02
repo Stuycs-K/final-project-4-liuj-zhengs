@@ -12,5 +12,5 @@ This project will take python code and format it in a way that is nearly unreada
 
 [Homework](https://github.com/Stuycs-K/final-project-4-liuj-zhengs/blob/main/HOMEWORK.md)
 
-Made by Jeelin Liu and Stanley Zheng
+Jeelin and Co: Jeelin Liu and Stanley Zheng
 
