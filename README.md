@@ -8,5 +8,9 @@ This project will take python code and format it in a way that is nearly unreada
   2. Move the code_obfuscator.py script into the directory of the file you wish to obfuscate.
   3. Run the code_obfuscator.py script and follow the directions.
 
+[Presentation](https://github.com/Stuycs-K/final-project-4-liuj-zhengs/blob/main/PRESENTATION.md)
+
+[Homework](https://github.com/Stuycs-K/final-project-4-liuj-zhengs/blob/main/HOMEWORK.md)
+
 Made by Jeelin Liu and Stanley Zheng
 
