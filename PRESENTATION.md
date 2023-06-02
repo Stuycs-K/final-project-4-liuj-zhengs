@@ -11,6 +11,15 @@ By taking advantage of Python's hex function, we are able to represent all strin
 ### Control Flow Obfuscation
 By adding control flows that will not affect the code, we can make the logic of the code a lot harder to follow. Adding statements that will never execute will make the code difficult to comprehend.
 
+    x = 0
+    while(x > 1):
+    	if(x%2==1):
+    		x=x*3+1
+    	else:
+    		x=x/2
+    	if(x==1):
+    		print("hello!") 
+
 ### Dummy Code Insertion
 Randomly declaring variables will both make it more difficult to analyze using reverse engineering tools, and also for people to read.
 
