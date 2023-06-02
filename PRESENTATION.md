@@ -1,3 +1,19 @@
+# OBFUSCATION 101
+
+Imagine this is you writing your final project for Mr. K's cybersecurity class.
+
+![image](https://github.com/Stuycs-K/final-project-4-liuj-zhengs/assets/124070663/2296677b-9c06-49c0-9956-083f9a049fb0)
+
+However... disaster has struck! The person sitting behind you, has copied your code for THEIR final project and is trying to pass it off as their own.
+
+<div align = "center">
+    <img src=https://github.com/Stuycs-K/final-project-4-liuj-zhengs/assets/124070663/87222500-b059-4490-980c-b9e2377e83ad>
+</div> 
+
+
+Have you ever had your friend copy your code, 1 for 1, for a CS Assignment? 
+Now you can expose them... with code obfuscation!
+
 ## What is Obfuscation?
 Obfuscation is the process of modifying a program so that it is harder to analyze and understand, but still maintains its original functionality.
 
